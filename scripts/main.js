@@ -11,6 +11,7 @@ var user = {
   },
   initStyling: function(){
     user.renderUser();
+    user.renderMessage();
   },
   initEvents: function(){
 
@@ -22,7 +23,20 @@ var user = {
         };
       user.createUser(newUser);
     });
+
+    $('#createNewMessage').on('submit', function (event) {
+      event.preventDefault();
+      var newChatMessage = {
+        message: $(this).find('input[name="newMessage"]').val()
+      };
+      user.createMessage(newChatMessage);
+
+    });
+
   },
+
+
+
 
     config: {
       url: 'http://tiy-fee-rest.herokuapp.com/collections/chitChat'
@@ -62,43 +76,23 @@ var user = {
     });
     $('input').val('');
 
-  }
-
-  // ---start create and render message in .chatArea ---//
-
-  //initStyling:
-  initStyling: function () {
-    toDoList.rendertoDoListItem();
   },
 
-  //imitEVents:
 
 
-  $('#createItem').on('submit', function (event) {
-    event.preventDefault();
-    var newToDoItem = {
-      toDoItem: $(this).find('input[name="newItem"]').val()
-    };
-    toDoList.createtoDoListItem(newToDoItem);
-
-  });
-
-
-
-
-  rendertoDoListItem: function () {
+  renderMessage: function () {
     $.ajax({
-      url: toDoList.config.url,
+      url: user.config.url,
       type: 'GET',
-      success: function (toDoList) {
-        console.log(toDoList);
-        var template= _.template($('#toDoTmpl').html());
+      success: function (user) {
+        console.log(user);
+        var template= _.template($('messageTmpl').html());
         var markup = "";
-        toDoList.forEach(function (item, idx, arr) {
+        user.forEach(function (item, idx, arr) {
           markup += template(item);
         });
         console.log('markup is ...', markup);
-        $('.ActualList').html(markup);
+        $('.chatArea').html(markup);
       },
       error: function (err) {
         console.log(err);
@@ -107,20 +101,20 @@ var user = {
   },
 
 
-  createMessage: function (listItem) {
+  createMessage: function (newMessage) {
     $.ajax({
-      url: toDoList.config.url,
-      data: listItem,
+      url: user.config.url,
+      data: newMessage,
       type: 'POST',
       success: function (data) {
         console.log(data);
-        toDoList.rendertoDoListItem();
+        user.renderMessage();
       },
       error: function (err) {
         console.log(err);
       }
     });
-  },
+  }
 
 
 

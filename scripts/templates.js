@@ -8,3 +8,10 @@ templates.userList = [
 '</li>',
 
 ].join("");
+
+
+templates.messageTmpl = [
+'<article data-messageid="<%=_id %>">',
+'<p><%= message %></p>',
+
+].join("");
