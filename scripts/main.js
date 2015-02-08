@@ -3,11 +3,22 @@ $(document).ready(function(){
 
 
   // to delete bad data uncomment out this line and put in correct id from server
-  //  chitChatApp.deleteMessage('54d66dacddad9b03000001f6');
+  //  chitChatApp.deleteMessage('54d68ea2ddad9b0300000281');
    //
-  //  chitChatApp.deleteMessage('54d66a39ddad9b03000001bf');
-  //  chitChatApp.deleteMessage('54d66a1eddad9b03000001bc');
+  //  chitChatApp.deleteMessage('54d6819fddad9b030000024d');
+  //  chitChatApp.deleteMessage('54d66ec4ddad9b03000001fd');
    //
+   //
+  //  chitChatApp.deleteMessage('54d66eb6ddad9b03000001fc');
+   //
+  //   chitChatApp.deleteMessage('54d66d97ddad9b03000001f3');
+  //   chitChatApp.deleteMessage('54d66d35ddad9b03000001ea');
+   //
+   //
+  //   chitChatApp.deleteMessage('54d66d27ddad9b03000001e8');
+   //
+  //    chitChatApp.deleteMessage('54d66ad1ddad9b03000001c9');
+  //    chitChatApp.deleteMessage('54d66acaddad9b03000001c8');
    //
 
 
@@ -18,9 +29,15 @@ var messageArray = [];
 
 var chitChatApp = {
 
+  config: {
+    url: 'http://tiy-fee-rest.herokuapp.com/collections'
+  },
+
   init: function(){
     chitChatApp.initEvents();
     chitChatApp.initStyling();
+    chitChatApp.userExists(); //skip login screen if user exists in local storage
+
     // setInterval(chitChatApp.renderUser, 1000);
     // setInterval(chitChatApp.renderMessage, 1000);
   },
@@ -28,6 +45,16 @@ var chitChatApp = {
     chitChatApp.renderUser();
     chitChatApp.renderMessage();
   },
+
+  userExists: function() {
+    if (localStorage.length === 1 || localStorage.length === 2) {
+      $('.loginForm').css('display', 'none');
+      $('.container').addClass('active');
+      console.log('User Exists!');
+    } else {
+      console.log('user does not exist');
+    };
+    },
   initEvents: function(){
 
     // var storedLogin = JSON.parse(localStorage.getItem('userInfo'));
@@ -60,12 +87,15 @@ var chitChatApp = {
       event.preventDefault();
 
       var userNameParse = JSON.parse(localStorage.getItem('userInfo'));
+      // var now = moment("YYYY-MM-DD HH:mm");
       var newMessage = {
         userMessage : $(this).siblings('input[name="newMessage"]').val(),
         userId: userNameParse.userId,
-        userName: userNameParse.userName
+        userName: userNameParse.userName,
+        // date: now
 
       };
+      // var now = moment();
       console.log('new message event worked!');
 
 
@@ -81,10 +111,6 @@ var chitChatApp = {
     // });
   },
 
-
-    config: {
-      url: 'http://tiy-fee-rest.herokuapp.com/collections'
-    },
 
 
     renderUser: function() {
@@ -161,20 +187,7 @@ var chitChatApp = {
     });
   },
 
-  // createMessage: function(message) {
-  //   $.ajax({
-  //     url: chitChatApp.config.url + "/chitChatMessage",
-  //     data: message,
-  //     type: 'POST',
-  //     success:function(data) {
-  //       console.log(data);
-  //       chitChatApp.renderMessage();
-  //
-  //     error: function(err) {
-  //       console.log(err);
-  //     }
-  //   });
-  // },
+
 
   addMessage: function(userMessage) {
     $.ajax({
@@ -186,11 +199,14 @@ var chitChatApp = {
         chitChatApp.renderMessage();
         var strMessage = JSON.stringify(data);
         localStorage.setItem('newMessage', strMessage);
-        data.forEach(function(item, idx, arr){
-          messageArray.push(userMessage);
 
-
-        });
+          var info = JSON.parse(localStorage.getItem('userInfo'));
+          var msg = JSON.parse(localStorage.getItem('newMessage'));
+          if (info.userName === msg.userName) {
+            data.forEach(function(item, idx, arr){
+              messageArray.push(userMessage(userName));
+            });
+          };
 
         console.log(messageArray);
 
@@ -217,5 +233,6 @@ var chitChatApp = {
     }
   });
 }
+
 
 };

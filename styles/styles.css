@@ -33,6 +33,10 @@ h3 {
 li {
   list-style-type: none; }
 
+p {
+  font-family: "kepler-std", serif;
+  font-size: 1.5em; }
+
 .container {
   width: 900px;
   margin: 30px auto;
