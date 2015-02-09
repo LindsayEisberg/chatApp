@@ -1,0 +1,31 @@
+@media screen and (max-width: 820px) {
+
+  .sendMessage {
+    margin-left: 0;
+    padding: 0;
+    text-align: left;
+  }
+
+  #createNewMessage {
+    max-width: 800px;
+    margin: auto;
+    p {
+      width: 100%;
+    }
+    .form-control {
+        max-width: 800px;
+        width: 100%;
+        margin: auto;
+    }
+    button {
+      max-width: 800px;
+      width: 100%;
+      margin: auto;
+    }
+  }
+}
+
+
+  .login {
+    max-width: 550px;
+  }

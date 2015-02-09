@@ -3,22 +3,25 @@ $(document).ready(function(){
 
 
   // to delete bad data uncomment out this line and put in correct id from server
-  //  chitChatApp.deleteMessage('54d68ea2ddad9b0300000281');
+  //  chitChatApp.deleteMessage('54d68ee9ddad9b0300000284');
    //
-  //  chitChatApp.deleteMessage('54d6819fddad9b030000024d');
-  //  chitChatApp.deleteMessage('54d66ec4ddad9b03000001fd');
-   //
-   //
-  //  chitChatApp.deleteMessage('54d66eb6ddad9b03000001fc');
-   //
-  //   chitChatApp.deleteMessage('54d66d97ddad9b03000001f3');
-  //   chitChatApp.deleteMessage('54d66d35ddad9b03000001ea');
+  //  chitChatApp.deleteMessage('54d68ea8ddad9b0300000282');
+  //  chitChatApp.deleteMessage('54d68e9fddad9b0300000280');
    //
    //
-  //   chitChatApp.deleteMessage('54d66d27ddad9b03000001e8');
+  //  chitChatApp.deleteMessage('54d68ba5ddad9b0300000275');
    //
-  //    chitChatApp.deleteMessage('54d66ad1ddad9b03000001c9');
-  //    chitChatApp.deleteMessage('54d66acaddad9b03000001c8');
+  //   chitChatApp.deleteMessage('54d6896dddad9b0300000269');
+  //   chitChatApp.deleteMessage('54d6896addad9b0300000268');
+   //
+   //
+  //   chitChatApp.deleteMessage('54d68964ddad9b0300000267');
+   //
+  //    chitChatApp.deleteMessage('54d6867cddad9b0300000264');
+  //    chitChatApp.deleteMessage('54d68610ddad9b0300000262');
+  //    chitChatApp.deleteMessage('54d6860cddad9b0300000261');
+  //    chitChatApp.deleteMessage('54d6841eddad9b0300000253');
+   //
    //
 
 
@@ -38,8 +41,8 @@ var chitChatApp = {
     chitChatApp.initStyling();
     chitChatApp.userExists(); //skip login screen if user exists in local storage
 
-    // setInterval(chitChatApp.renderUser, 1000);
-    // setInterval(chitChatApp.renderMessage, 1000);
+    setInterval(chitChatApp.renderUser, 1000);
+    setInterval(chitChatApp.renderMessage, 1000);
   },
   initStyling: function(){
     chitChatApp.renderUser();
@@ -159,7 +162,12 @@ var chitChatApp = {
     type: 'DELETE',
     success: function (data) {
       console.log(data);
+      localStorage.removeItem('userInfo');
+      $('.container').removeClass('active');
+      $('.loginForm').css('display', 'block');
+      $('.login').css('display', 'block');
       chitChatApp.renderUser();
+
     },
     error: function (err) {
       console.log(err);

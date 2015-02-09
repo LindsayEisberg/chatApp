@@ -13,7 +13,7 @@ templates.userList = [
 
 ].join("");
 
-
+// var now = moment();
 
 templates.messageTmpl = [
 '<li data-itemid="<%= _id %>">',

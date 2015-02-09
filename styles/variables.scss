@@ -2,6 +2,13 @@ $head-font: "prenton-condensed",sans-serif;
 $p-font: "kepler-std",serif;
 $head-font-color: #260E0E; //maroon
 $p-font-color: #0D0D0D; //dark dark green
-$secondary-color: #1F6650; //seafoam
+$secondary-color: #6ef3c8; //seafoam
 $light-color: #728391; //blueish gray
 $blue: #0D000D;
+
+
+@mixin transition ($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  transition: $transition;
+}

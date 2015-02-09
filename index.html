@@ -5,6 +5,7 @@
   <title>Chat App</title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="styles/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="//use.typekit.net/lgz4ifj.js"></script>
 <script>try{Typekit.load();}catch(e){}</script>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -18,12 +19,12 @@
 <div class="row">
   <div class="col-md-4"></div>
   <div class="col-md-4">
-    <div class="loginForm">
+    <div class="loginForm active">
       <div class="login">
         <h2>What is your name?</h2>
         <form action="" class="createItem">
-          <i class="fa fa-user fa-2x"></i><input type="text" class="newUser" name="newUser" placeholder="Input your Username">
-          <button type="submit" class="btn btn-primary">Login</button>
+          <input type="text" class="newUser" name="newUser" placeholder="Input your Username">
+          <button id="newUserSubmit" type="submit" class="btn btn-primary">Login</button>
         </form>
       </div>
     </div>
@@ -53,7 +54,7 @@
         <form id="createNewMessage" action="">
           <p>
             <input type="text" class="form-control" name="newMessage">
-            <a href="" class="newMessage">Send</a>
+            <button class="newMessage" type= "submit" class="btn btn-primary">Send</button>
 
           </p>
         </form>

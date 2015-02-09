@@ -2,21 +2,34 @@ body, h1, h2, h3, h4, h5, h6, p, a, ul, li {
   padding: 0;
   margin: 0;
 }
-
-.login {
-  position: fixed;
-  top: 20%;
-  width: 400px;
-  height: 650px;
-  border: 1px solid;
-  margin: auto;
-}
-
 .loginForm {
   text-align: center;
-  width: 900px;
+  width: 100%;
   margin: auto;
+  display: inline;
 }
+
+.login {
+  top: 20%;
+  width: 100%;
+  height: 400px;
+  border: 6px double $light-color;
+  margin-top: 21%;
+  box-shadow: 0px 2px 5px rgba(0,0,0,.25);
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+input.newUser {
+    width: 85%;
+    height: 50px;
+    border-radius: 5px;
+    margin-top: 15%;
+    font-family: $p-font;
+    font-size: 18px;
+  }
+
+
 
 h1 {
   font-family: $head-font;
@@ -31,7 +44,8 @@ h1 {
 
 h2 {
   font-family: $head-font;
-  border-bottom: 2px solid $head-font-color;
+  font-size: 3em;
+line-height: 2.2em;
 }
 
 h3 {
@@ -59,9 +73,45 @@ p {
 }
 
 
+#newUserSubmit {
+  margin-top: 20%;
+  background-color:$head-font-color;
+  color: white;
+  font-family: $p-font;
+  font-size: 20px;
+  float: center;
+  width: 85%;
+  &:focus {
+    background-color: $secondary-color;
+    color: black;
+  }
+  &:hover {
+    background-color: $secondary-color;
+    color: black;
+    @include transition(all 1s ease);
+
+  }
+}
+
+.newMessage {
+  @extend #newUserSubmit;
+  width: 120px;
+  margin-top: 20px;
+  &:focus {
+    @extend #newUserSubmit:focus;
+  }
+  &:hover {
+    @extend #newUsersubmit:hover;
+  }
+}
 
 //JQUERY
 
+
 .active {
   display: block;
+}
+
+.activeLogin {
+  display: inline;
 }
