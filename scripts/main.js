@@ -3,7 +3,7 @@ $(document).ready(function(){
 
 
   // to delete bad data uncomment out this line and put in correct id from server
-  //  chitChatApp.deleteMessage('54d68ee9ddad9b0300000284');
+  //  chitChatApp.deleteMessage('54d8e30ecf6a6b030000009a');
    //
   //  chitChatApp.deleteMessage('54d68ea8ddad9b0300000282');
   //  chitChatApp.deleteMessage('54d68e9fddad9b0300000280');
@@ -41,8 +41,8 @@ var chitChatApp = {
     chitChatApp.initStyling();
     chitChatApp.userExists(); //skip login screen if user exists in local storage
 
-    setInterval(chitChatApp.renderUser, 1000);
-    setInterval(chitChatApp.renderMessage, 1000);
+    // setInterval(chitChatApp.renderUser, 1000);
+    // setInterval(chitChatApp.renderMessage, 1000);
   },
   initStyling: function(){
     chitChatApp.renderUser();
@@ -82,6 +82,7 @@ var chitChatApp = {
     $('.userList').on('click', '.logout', function (event){
         event.preventDefault();
         var userId = $(this).closest('li').data('itemid');
+        localStorage.removeItem('newMessage');
         chitChatApp.deleteUser(userId);
 
     });
@@ -90,12 +91,17 @@ var chitChatApp = {
       event.preventDefault();
 
       var userNameParse = JSON.parse(localStorage.getItem('userInfo'));
-      // var now = moment("YYYY-MM-DD HH:mm");
+      var date = moment().format('L')
+      var timestamp = moment().format('LT')
+
+
+
+      // var day = moment("YYYY-MM-DD HH:mm");
       var newMessage = {
         userMessage : $(this).siblings('input[name="newMessage"]').val(),
         userId: userNameParse.userId,
         userName: userNameParse.userName,
-        // date: now
+        userDate: date + " " + timestamp
 
       };
       // var now = moment();
@@ -177,7 +183,7 @@ var chitChatApp = {
 
   renderMessage: function() {
     $.ajax({
-      url: chitChatApp.config.url + "/chitChatMessage2",
+      url: chitChatApp.config.url + "/chitChatMessage3",
       type: "GET",
       success: function (message) {
         console.log(message);
@@ -199,7 +205,7 @@ var chitChatApp = {
 
   addMessage: function(userMessage) {
     $.ajax({
-      url: chitChatApp.config.url + "/chitChatMessage2",
+      url: chitChatApp.config.url + "/chitChatMessage3",
       data: userMessage,
       type: "POST",
       success: function (data) {
@@ -210,11 +216,11 @@ var chitChatApp = {
 
           var info = JSON.parse(localStorage.getItem('userInfo'));
           var msg = JSON.parse(localStorage.getItem('newMessage'));
-          if (info.userName === msg.userName) {
-            data.forEach(function(item, idx, arr){
-              messageArray.push(userMessage(userName));
-            });
-          };
+          // if (info.userName === msg.userName) {
+          //   data.forEach(function(item, idx, arr){
+          //     messageArray.push(userMessage(userName));
+          //   });
+          // };
 
         console.log(messageArray);
 
@@ -230,7 +236,7 @@ var chitChatApp = {
 
   deleteMessage: function(userId) {
   $.ajax({
-    url: chitChatApp.config.url + "/chitChatMessage2" + "/" + userId,
+    url: chitChatApp.config.url + "/chitChatMessage3" + "/" + userId,
     type: 'DELETE',
     success: function (data) {
       console.log(data);
